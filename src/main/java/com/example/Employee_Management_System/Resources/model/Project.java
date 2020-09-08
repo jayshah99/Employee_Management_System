@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -24,5 +24,5 @@ public class Project {
     @Column
     private String name;
     @Column
-    private String start_date;
+    private Date start_date;
 }

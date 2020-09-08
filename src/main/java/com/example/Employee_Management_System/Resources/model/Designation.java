@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -25,15 +26,15 @@ public class Designation {
     @Column
     private int salary;
     @Column
-    private String start_date;
+    private Date start_date;
     @Column
-    private String end_date;
+    private Date end_date;
     @Column
     private boolean current;
     @Column
     private int empid;
 
-    public Designation(String designation, int salary, String start_date, String end_date, boolean current, int empid) {
+    public Designation(String designation, int salary, Date start_date, Date end_date, boolean current, int empid) {
         this.designation = designation;
         this.salary = salary;
         this.start_date = start_date;
