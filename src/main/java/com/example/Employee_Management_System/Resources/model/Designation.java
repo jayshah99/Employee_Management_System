@@ -30,5 +30,15 @@ public class Designation {
     private String end_date;
     @Column
     private boolean current;
+    @Column
+    private int empid;
 
+    public Designation(String designation, int salary, String start_date, String end_date, boolean current, int empid) {
+        this.designation = designation;
+        this.salary = salary;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.current = current;
+        this.empid = empid;
+    }
 }

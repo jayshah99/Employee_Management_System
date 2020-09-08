@@ -5,10 +5,12 @@ import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
 import com.example.Employee_Management_System.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -46,14 +48,14 @@ public class EmployeeController {
         return employeeService.updateById(request,id);
     }
 //    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("employees/{name}")
-//    public List<Employee> getByName(@PathVariable("name") String name) {
+//    @GetMapping("/employees")
+//    public List<Employee> getByName(@RequestParam(value = "name") String name) {
 //       return employeeService.getByName(name);
 //    }
-
+//
 //    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/employees/{id}")
-//    public Employee get(@PathVariable("id") int id) {
+//    @GetMapping("/employees")
+//    public Employee get(@RequestParam(value = "id") int id) {
 //        return employeeService.getById(id);
 //    }
 
