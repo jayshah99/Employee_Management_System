@@ -47,17 +47,17 @@ public class EmployeeController {
     public Employee updateById(@RequestBody EmployeeRequest request, @PathVariable("id") int id) {
         return employeeService.updateById(request,id);
     }
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/employees")
-//    public List<Employee> getByName(@RequestParam(value = "name") String name) {
-//       return employeeService.getByName(name);
-//    }
-//
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/employees")
-//    public Employee get(@RequestParam(value = "id") int id) {
-//        return employeeService.getById(id);
-//    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/employees", params = {"name"})
+    public List<Employee> getByName(@RequestParam(value = "name") String name) {
+       return employeeService.getByName(name);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/employees/{id}")
+    public Employee get(@PathVariable(value = "id") int id) {
+        return employeeService.getById(id);
+    }
 
 
 

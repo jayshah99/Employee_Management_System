@@ -2,7 +2,7 @@ package com.example.Employee_Management_System.Service;
 
 import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Repositories.EmployeeRepository;
-import com.example.Employee_Management_System.Repositories.ProjectRepository;
+import com.example.Employee_Management_System.Resources.model.Designation;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
@@ -19,12 +19,11 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
-    ProjectRepository projectRepository;
-    @Autowired
     DesignationRepository designationRepository;
 
 
     public Employee addEmployee(EmployeeRequest request) {
+//        List<Designation> designation = request.getDesignation();
         Employee employee = new Employee(
                 request.getName(),
                 request.getAddress(),
@@ -32,9 +31,12 @@ public class EmployeeService {
                 request.getGender(),
                 request.getEmail(),
                 request.getPhone_number(),
-                request.getProject(),
                 request.getDesignation()
         );
+//        for (Designation desg : designation) {
+//            desg.setEmployee(employee);
+//        }
+
         return employeeRepository.save(employee);
     }
 
@@ -58,6 +60,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getByName(String name) {
+        System.out.println("name = " +name);
         return employeeRepository.findByName(name);
     }
 
@@ -74,7 +77,6 @@ public class EmployeeService {
         employee.setGender(request.getGender());
         employee.setPhone_number(request.getPhone_number());
         employee.setDesignation(request.getDesignation());
-        employee.setProject(request.getProject());
         return employeeRepository.save(employee);
     }
 }

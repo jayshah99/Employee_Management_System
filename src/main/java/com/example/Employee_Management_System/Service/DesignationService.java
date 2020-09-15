@@ -22,8 +22,7 @@ public class DesignationService {
                 request.getSalary(),
                 request.getStart_date(),
                 request.getEnd_date(),
-                request.isCurrent(),
-                request.getEmpid()
+                request.isCurrent()
         );
         return designationRepository.save(designation);
     }

@@ -1,5 +1,6 @@
 package com.example.Employee_Management_System.Resources.request;
 
+import com.example.Employee_Management_System.Resources.model.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,5 @@ public class DesignationRequest {
     private Date end_date;
 
     private boolean current;
-
-    private int empid;
 
 }

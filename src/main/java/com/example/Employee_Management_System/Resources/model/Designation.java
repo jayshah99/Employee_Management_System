@@ -1,14 +1,12 @@
 package com.example.Employee_Management_System.Resources.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Data
@@ -31,15 +29,18 @@ public class Designation {
     private Date end_date;
     @Column
     private boolean current;
-    @Column
-    private int empid;
 
-    public Designation(String designation, int salary, Date start_date, Date end_date, boolean current, int empid) {
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JsonIgnoreProperties("designation")
+//   @JoinColumn(name = "empid", nullable = false)
+//    private Employee employee;
+
+    public Designation(String designation, int salary, Date start_date, Date end_date, boolean current) {
         this.designation = designation;
         this.salary = salary;
         this.start_date = start_date;
         this.end_date = end_date;
         this.current = current;
-        this.empid = empid;
     }
+
 }
