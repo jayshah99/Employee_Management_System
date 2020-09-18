@@ -2,6 +2,7 @@ package com.example.Employee_Management_System.Service;
 
 import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.request.DesignationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,15 @@ public class DesignationService {
     DesignationRepository designationRepository;
 
 
-    public Designation addDesignation(Designation designation) {
+    public Designation addDesignation(DesignationRequest request) {
 
+        Designation designation = new Designation(
+                request.getDesignation(),
+                request.getSalary(),
+                request.getStart_date(),
+                request.getEnd_date(),
+                request.isCurrent()
+        );
         return designationRepository.save(designation);
     }
 
@@ -27,8 +35,8 @@ public class DesignationService {
         designationRepository.deleteById(id);
     }
 
-    public Designation update(Designation designation) {
-        return addDesignation(designation);
+    public Designation update(DesignationRequest request) {
+        return addDesignation(request);
     }
 
 

@@ -1,12 +1,14 @@
 package com.example.Employee_Management_System.Controller;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.request.DesignationRequest;
 import com.example.Employee_Management_System.Service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 public class DesignationController {
 
@@ -15,8 +17,8 @@ public class DesignationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/designations")
-    public Designation addDesignation (@RequestBody Designation designation){
-        return designationService.addDesignation(designation);
+    public Designation addDesignation(@RequestBody DesignationRequest request) {
+        return designationService.addDesignation(request);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -33,9 +35,10 @@ public class DesignationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/designations")
-    public Designation update(@RequestBody Designation designation) {
-        return designationService.update(designation);
+    public Designation update(@RequestBody DesignationRequest request){
+        return designationService.update(request);
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/designations/{id}")
     public Designation get(@PathVariable("id") int id) {

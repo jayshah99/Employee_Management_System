@@ -1,7 +1,6 @@
 package com.example.Employee_Management_System.Resources.request;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
-import com.example.Employee_Management_System.Resources.model.Project;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,8 +33,6 @@ public class EmployeeRequest {
 
     @NotNull(message = "Phone number cannot be null")
     private String phone_number;
-
-    private List<Project> project;
 
     private List<Designation> designation;
 }
