@@ -47,7 +47,11 @@ public class Employee {
 //    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Designation> designation;
 
-    public Employee(String name, String address,int age, String gender, String email, String phoneNumber,boolean currentlyWorking,List<Designation> designation) {
+    @OneToMany(targetEntity = Salary.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "empid", referencedColumnName = "id")
+    private List<Salary> salary;
+
+    public Employee(String name, String address,int age, String gender, String email, String phoneNumber,boolean currentlyWorking,List<Designation> designation, List<Salary> salary) {
         this.name = name;
         this.age = age;
         this.address = address;
@@ -56,6 +60,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.currentlyWorking=currentlyWorking;
         this.designation = designation;
+        this.salary=salary;
     }
 
 

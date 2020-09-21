@@ -19,7 +19,6 @@ public class DesignationService {
 
         Designation designation = new Designation(
                 request.getDesignation(),
-                request.getSalary(),
                 request.getStartDate(),
                 request.getEndDate(),
                 request.isCurrent()

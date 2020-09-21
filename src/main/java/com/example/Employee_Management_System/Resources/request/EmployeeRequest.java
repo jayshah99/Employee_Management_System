@@ -1,6 +1,7 @@
 package com.example.Employee_Management_System.Resources.request;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.model.Salary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,4 +39,6 @@ public class EmployeeRequest {
     private boolean currentlyWorking;
 
     private List<Designation> designation;
+
+    private List<Salary> salary;
 }

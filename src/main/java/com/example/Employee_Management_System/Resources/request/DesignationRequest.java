@@ -17,10 +17,6 @@ public class DesignationRequest {
     @NotNull(message = "Designation cannot be null")
     private String designation;
 
-    @NotNull(message = "Salary cannot be null")
-    private int salary;
-
-
     private Date startDate;
 
     private Date endDate;

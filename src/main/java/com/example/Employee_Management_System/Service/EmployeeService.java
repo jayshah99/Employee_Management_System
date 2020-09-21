@@ -1,6 +1,5 @@
 package com.example.Employee_Management_System.Service;
 
-import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
@@ -17,9 +16,6 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
-    DesignationRepository designationRepository;
-
 
     public Employee addEmployee(EmployeeRequest request) {
 //        List<Designation> designation = request.getDesignation();
@@ -31,7 +27,8 @@ public class EmployeeService {
                 request.getEmail(),
                 request.getPhoneNumber(),
                 request.isCurrentlyWorking(),
-                request.getDesignation()
+                request.getDesignation(),
+                request.getSalary()
         );
 //        for (Designation desg : designation) {
 //            desg.setEmployee(employee);
@@ -78,6 +75,7 @@ public class EmployeeService {
         employee.setPhoneNumber(request.getPhoneNumber());
         employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
+        employee.setSalary(request.getSalary());
         return employeeRepository.save(employee);
     }
 }

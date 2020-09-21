@@ -23,9 +23,6 @@ public class Designation {
     private String designation;
 
     @Column
-    private int salary;
-
-    @Column
     private Date startDate;
 
     @Column
@@ -39,9 +36,8 @@ public class Designation {
 //   @JoinColumn(name = "empid", nullable = false)
 //    private Employee employee;
 
-    public Designation(String designation, int salary, Date startDate, Date endDate, boolean current) {
+    public Designation(String designation, Date startDate, Date endDate, boolean current) {
         this.designation = designation;
-        this.salary = salary;
         this.startDate = startDate;
         this.endDate = endDate;
         this.current = current;
