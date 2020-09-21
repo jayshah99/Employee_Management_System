@@ -34,5 +34,8 @@ public class EmployeeRequest {
     @NotNull(message = "Phone number cannot be null")
     private String phoneNumber;
 
+    @NotNull(message = "There should be true or false in currently working column")
+    private boolean currentlyWorking;
+
     private List<Designation> designation;
 }

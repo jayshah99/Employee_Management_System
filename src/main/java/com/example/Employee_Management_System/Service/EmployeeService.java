@@ -30,6 +30,7 @@ public class EmployeeService {
                 request.getGender(),
                 request.getEmail(),
                 request.getPhoneNumber(),
+                request.isCurrentlyWorking(),
                 request.getDesignation()
         );
 //        for (Designation desg : designation) {
@@ -75,6 +76,7 @@ public class EmployeeService {
         employee.setEmail(request.getEmail());
         employee.setGender(request.getGender());
         employee.setPhoneNumber(request.getPhoneNumber());
+        employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
         return employeeRepository.save(employee);
     }
