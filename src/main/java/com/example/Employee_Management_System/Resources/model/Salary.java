@@ -35,6 +35,9 @@ public class Salary {
     @Column
     private int numberOfChange;
 
+    @Column
+    private int empid;
+
     public Salary(int salary, Date startDate, Date endDate, boolean current, int numberOfChange) {
         this.salary = salary;
         this.startDate = startDate;

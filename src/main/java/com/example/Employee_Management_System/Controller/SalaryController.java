@@ -1,5 +1,6 @@
 package com.example.Employee_Management_System.Controller;
 
+import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.model.Salary;
 import com.example.Employee_Management_System.Resources.request.SalaryRequest;
 import com.example.Employee_Management_System.Service.SalaryService;
@@ -43,6 +44,12 @@ public class SalaryController {
     @GetMapping("/salaries/{id}")
     public Salary get(@PathVariable("id") int id) {
         return salaryService.getById(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("maxSalary")
+    public Employee maxSalary(){
+        return salaryService.maxSalary();
     }
 }
 

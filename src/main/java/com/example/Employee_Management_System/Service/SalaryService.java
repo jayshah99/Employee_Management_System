@@ -1,6 +1,8 @@
 package com.example.Employee_Management_System.Service;
 
+import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Repositories.SalaryRepository;
+import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.model.Salary;
 import com.example.Employee_Management_System.Resources.request.SalaryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import java.util.List;
 public class SalaryService {
     @Autowired
     SalaryRepository salaryRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
 
     public Salary addSalary(SalaryRequest request) {
@@ -41,6 +45,11 @@ public class SalaryService {
 
     public Salary getById(int id){
         return salaryRepository.findById(id).get();
+    }
+
+    public Employee maxSalary() {
+        Salary salary = salaryRepository.maxSalary();
+        return employeeRepository.findById(salary.getEmpid()).get();
     }
 }
 
