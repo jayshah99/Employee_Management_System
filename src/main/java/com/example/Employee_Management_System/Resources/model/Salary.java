@@ -34,4 +34,12 @@ public class Salary {
 
     @Column
     private int numberOfChange;
+
+    public Salary(int salary, Date startDate, Date endDate, boolean current, int numberOfChange) {
+        this.salary = salary;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.current = current;
+        this.numberOfChange = numberOfChange;
+    }
 }
