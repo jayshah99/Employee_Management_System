@@ -32,7 +32,7 @@ public class EmployeeRequest {
     private String email;
 
     @NotNull(message = "Phone number cannot be null")
-    private String phone_number;
+    private String phoneNumber;
 
     private List<Designation> designation;
 }

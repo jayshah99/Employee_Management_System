@@ -30,7 +30,9 @@ public class Employee {
     @Column
     private String email;
     @Column
-    private String phone_number;
+    private String phoneNumber;
+//    @Column
+//    private boolean currently_working;
 
     @OneToMany(targetEntity = Designation.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "empid", referencedColumnName = "id")
@@ -38,13 +40,13 @@ public class Employee {
 //    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Designation> designation;
 
-    public Employee(String name, String address,int age, String gender, String email, String phone_number,List<Designation> designation) {
+    public Employee(String name, String address,int age, String gender, String email, String phoneNumber,List<Designation> designation) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.gender = gender;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.designation = designation;
     }
 

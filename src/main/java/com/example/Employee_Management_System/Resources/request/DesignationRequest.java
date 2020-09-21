@@ -21,9 +21,9 @@ public class DesignationRequest {
     private int salary;
 
 
-    private Date start_date;
+    private Date startDate;
 
-    private Date end_date;
+    private Date endDate;
 
     private boolean current;
 

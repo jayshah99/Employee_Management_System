@@ -2,7 +2,6 @@ package com.example.Employee_Management_System.Service;
 
 import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Repositories.EmployeeRepository;
-import com.example.Employee_Management_System.Resources.model.Designation;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
@@ -30,7 +29,7 @@ public class EmployeeService {
                 request.getAge(),
                 request.getGender(),
                 request.getEmail(),
-                request.getPhone_number(),
+                request.getPhoneNumber(),
                 request.getDesignation()
         );
 //        for (Designation desg : designation) {
@@ -75,7 +74,7 @@ public class EmployeeService {
         employee.setAddress(request.getAddress());
         employee.setEmail(request.getEmail());
         employee.setGender(request.getGender());
-        employee.setPhone_number(request.getPhone_number());
+        employee.setPhoneNumber(request.getPhoneNumber());
         employee.setDesignation(request.getDesignation());
         return employeeRepository.save(employee);
     }

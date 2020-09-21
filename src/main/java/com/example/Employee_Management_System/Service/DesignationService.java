@@ -20,8 +20,8 @@ public class DesignationService {
         Designation designation = new Designation(
                 request.getDesignation(),
                 request.getSalary(),
-                request.getStart_date(),
-                request.getEnd_date(),
+                request.getStartDate(),
+                request.getEndDate(),
                 request.isCurrent()
         );
         return designationRepository.save(designation);
