@@ -1,6 +1,5 @@
 package com.example.Employee_Management_System.Resources.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +18,16 @@ public class Designation {
     @Column
     @GeneratedValue
     private int id;
+
     @Column
     private String designation;
+
     @Column
-    private int salary;
+    private Date startDate;
+
     @Column
-    private Date start_date;
-    @Column
-    private Date end_date;
+    private Date endDate;
+
     @Column
     private boolean current;
 
@@ -35,11 +36,10 @@ public class Designation {
 //   @JoinColumn(name = "empid", nullable = false)
 //    private Employee employee;
 
-    public Designation(String designation, int salary, Date start_date, Date end_date, boolean current) {
+    public Designation(String designation, Date startDate, Date endDate, boolean current) {
         this.designation = designation;
-        this.salary = salary;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.current = current;
     }
 

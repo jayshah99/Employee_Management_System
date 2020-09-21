@@ -1,8 +1,6 @@
 package com.example.Employee_Management_System.Service;
 
-import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Repositories.EmployeeRepository;
-import com.example.Employee_Management_System.Resources.model.Designation;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
@@ -18,9 +16,6 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
-    DesignationRepository designationRepository;
-
 
     public Employee addEmployee(EmployeeRequest request) {
 //        List<Designation> designation = request.getDesignation();
@@ -30,8 +25,10 @@ public class EmployeeService {
                 request.getAge(),
                 request.getGender(),
                 request.getEmail(),
-                request.getPhone_number(),
-                request.getDesignation()
+                request.getPhoneNumber(),
+                request.isCurrentlyWorking(),
+                request.getDesignation(),
+                request.getSalary()
         );
 //        for (Designation desg : designation) {
 //            desg.setEmployee(employee);
@@ -75,8 +72,10 @@ public class EmployeeService {
         employee.setAddress(request.getAddress());
         employee.setEmail(request.getEmail());
         employee.setGender(request.getGender());
-        employee.setPhone_number(request.getPhone_number());
+        employee.setPhoneNumber(request.getPhoneNumber());
+        employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
+        employee.setSalary(request.getSalary());
         return employeeRepository.save(employee);
     }
 }

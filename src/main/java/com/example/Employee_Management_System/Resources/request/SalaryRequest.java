@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DesignationRequest {
+public class SalaryRequest {
 
-    @NotNull(message = "Designation cannot be null")
-    private String designation;
+    @NotNull(message = "Salary cannot be null")
+    private int salary;
 
     private Date startDate;
 
     private Date endDate;
 
     private boolean current;
+
 
 }

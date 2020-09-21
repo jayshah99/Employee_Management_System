@@ -1,6 +1,7 @@
 package com.example.Employee_Management_System.Resources.request;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.model.Salary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,12 @@ public class EmployeeRequest {
     private String email;
 
     @NotNull(message = "Phone number cannot be null")
-    private String phone_number;
+    private String phoneNumber;
+
+    @NotNull(message = "There should be true or false in currently working column")
+    private boolean currentlyWorking;
 
     private List<Designation> designation;
+
+    private List<Salary> salary;
 }
