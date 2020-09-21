@@ -24,8 +24,7 @@ public class SalaryService {
                 request.getSalary(),
                 request.getStartDate(),
                 request.getEndDate(),
-                request.isCurrent(),
-                request.getNumberOfChanges()
+                request.isCurrent()
         );
         return salaryRepository.save(salary);
     }

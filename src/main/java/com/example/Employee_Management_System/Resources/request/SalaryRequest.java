@@ -21,6 +21,5 @@ public class SalaryRequest {
 
     private boolean current;
 
-    private int numberOfChanges;
 
 }

@@ -29,7 +29,7 @@ public class SalaryController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("salaries/{id}")
+    @DeleteMapping("/salaries/{id}")
     public void delete(@PathVariable(value = "id") int id) {
         salaryService.delete(id);
     }
@@ -47,7 +47,7 @@ public class SalaryController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("maxSalary")
+    @GetMapping("/salaries/max")
     public Employee maxSalary(){
         return salaryService.maxSalary();
     }
