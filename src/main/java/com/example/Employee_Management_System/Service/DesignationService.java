@@ -2,8 +2,12 @@ package com.example.Employee_Management_System.Service;
 
 import com.example.Employee_Management_System.Repositories.DesignationRepository;
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.request.DesignationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +32,14 @@ public class DesignationService {
 
     public List<Designation> designationsList() {
         return designationRepository.findAll();
+    }
+
+    public List<Designation> findPaginated(int from, int size) {
+
+        Pageable paging = PageRequest.of(from, size);
+        Page<Designation> pagedResult = designationRepository.findAll(paging);
+
+        return pagedResult.toList();
     }
 
     public void delete(int id) {

@@ -6,6 +6,9 @@ import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.model.Salary;
 import com.example.Employee_Management_System.Resources.request.SalaryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +34,14 @@ public class SalaryService {
 
     public List<Salary> salaryList() {
         return salaryRepository.findAll();
+    }
+
+    public List<Salary> findPaginated(int from, int size) {
+
+        Pageable paging = PageRequest.of(from, size);
+        Page<Salary> pagedResult = salaryRepository.findAll(paging);
+
+        return pagedResult.toList();
     }
 
     public void delete(int id) {

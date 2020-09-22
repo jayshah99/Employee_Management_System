@@ -29,6 +29,11 @@ public class EmployeeController {
         return employeeService.employeesList();
     }
 
+    @GetMapping(path = "/employees", params = {"from","size"})
+    public List<Employee> getPaginatedEmployees(@RequestParam(value= "from") int from, @RequestParam(value="size") int size ) {
+        return employeeService.findPaginated(from, size);
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("employees/{id}")
     public Response delete(@PathVariable(value = "id") int id) {
