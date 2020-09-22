@@ -1,21 +1,19 @@
 package com.example.Employee_Management_System.Resources.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Response {
 
-        private boolean isError;
-        private String message;
+    @JsonProperty("error")
+    private boolean isError;
 
-        public Response(boolean isError, String message) {
-            this.isError = isError;
-            this.message = message;
-        }
-
-        public boolean isError() {
-            return isError;
-        }
-
-        public String getMessage() {
-            return message;
-        }
+    @JsonProperty("message")
+    private String message;
 }
 
