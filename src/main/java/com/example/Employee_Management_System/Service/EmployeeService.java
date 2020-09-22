@@ -6,8 +6,11 @@ import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +44,13 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public List<Employee> findPaginated(int pageNo, int pageSize) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<Employee> pagedResult = employeeRepository.findAll(paging);
+
+        return pagedResult.toList();
+    }
     public Response delete(int id) {
 
         Optional<Employee> employee = employeeRepository.findById(id);

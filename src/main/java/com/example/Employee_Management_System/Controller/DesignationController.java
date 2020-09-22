@@ -1,6 +1,7 @@
 package com.example.Employee_Management_System.Controller;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
+import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.request.DesignationRequest;
 import com.example.Employee_Management_System.Service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class DesignationController {
     @PostMapping("/designations")
     public Designation addDesignation(@RequestBody DesignationRequest request) {
         return designationService.addDesignation(request);
+    }
+
+    @GetMapping("/designations/{pageNo}/{pageSize}")
+    public List<Designation> getPaginated(@PathVariable int pageNo, @PathVariable int pageSize) {
+        return designationService.findPaginated(pageNo, pageSize);
     }
 
     @ResponseStatus(HttpStatus.OK)
