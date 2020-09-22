@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -18,6 +20,7 @@ import java.util.List;
 public class EmployeeRequest {
 
     @NotNull(message = "Name cannot be null")
+    @NotEmpty(message = "Name can not be empty")
     private String name;
 
     @NotNull(message = "Age cannot be null")
@@ -41,4 +44,16 @@ public class EmployeeRequest {
     private List<Designation> designation;
 
     private List<Salary> salary;
+
+    public List<Designation> getDesignation() {
+        if (designation == null)
+            return Collections.emptyList();
+        return designation;
+    }
+
+    public List<Salary> getSalary() {
+        if (salary == null)
+            return Collections.emptyList();
+        return salary;
+    }
 }
