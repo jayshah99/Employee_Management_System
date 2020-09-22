@@ -62,7 +62,8 @@ public class EmployeeService {
     }
 
     public Employee getById(int id){
-        return employeeRepository.findById(id).get();
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Employee not found by id: %s", id)));
     }
 
     public Employee updateById(EmployeeRequest request, int id) {
