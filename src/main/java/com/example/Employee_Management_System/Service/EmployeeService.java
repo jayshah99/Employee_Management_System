@@ -44,9 +44,9 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> findPaginated(int pageNo, int pageSize) {
+    public List<Employee> findPaginated(int from, int size) {
 
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Pageable paging = PageRequest.of(from, size);
         Page<Employee> pagedResult = employeeRepository.findAll(paging);
 
         return pagedResult.toList();

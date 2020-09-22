@@ -34,9 +34,9 @@ public class DesignationService {
         return designationRepository.findAll();
     }
 
-    public List<Designation> findPaginated(int pageNo, int pageSize) {
+    public List<Designation> findPaginated(int from, int size) {
 
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Pageable paging = PageRequest.of(from, size);
         Page<Designation> pagedResult = designationRepository.findAll(paging);
 
         return pagedResult.toList();

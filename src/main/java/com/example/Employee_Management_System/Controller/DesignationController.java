@@ -22,9 +22,9 @@ public class DesignationController {
         return designationService.addDesignation(request);
     }
 
-    @GetMapping("/designations/{pageNo}/{pageSize}")
-    public List<Designation> getPaginated(@PathVariable int pageNo, @PathVariable int pageSize) {
-        return designationService.findPaginated(pageNo, pageSize);
+    @GetMapping(path= "/designations" ,params = {"from","size"})
+    public List<Designation> getPaginated(@RequestParam(value= "from") int from, @RequestParam(value="size") int size) {
+        return designationService.findPaginated(from, size);
     }
 
     @ResponseStatus(HttpStatus.OK)

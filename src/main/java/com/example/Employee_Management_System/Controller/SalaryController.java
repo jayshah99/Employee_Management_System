@@ -22,9 +22,9 @@ public class SalaryController {
         return salaryService.addSalary(request);
     }
 
-    @GetMapping("/salaries/{pageNo}/{pageSize}")
-    public List<Salary> getPaginatedEmployees(@PathVariable int pageNo, @PathVariable int pageSize) {
-        return salaryService.findPaginated(pageNo, pageSize);
+    @GetMapping(path= "/salaries",params = {"from","size"})
+    public List<Salary> getPaginatedEmployees(@RequestParam(value= "from") int from, @RequestParam(value="size") int size) {
+        return salaryService.findPaginated(from, size);
     }
 
     @ResponseStatus(HttpStatus.OK)
