@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class SalaryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/salaries")
-    public Salary addSalary(@RequestBody SalaryRequest request) {
+    public Salary addSalary(@Valid @RequestBody SalaryRequest request) {
         return salaryService.addSalary(request);
     }
 

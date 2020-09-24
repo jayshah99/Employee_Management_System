@@ -5,6 +5,7 @@ import com.example.Employee_Management_System.Repositories.SalaryRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.model.Salary;
 import com.example.Employee_Management_System.Resources.request.SalaryRequest;
+import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,7 +55,8 @@ public class SalaryService {
 
 
     public Salary getById(int id){
-        return salaryRepository.findById(id).get();
+        return salaryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Salary not found by id: %s", id)));
     }
 
     public Employee maxSalary() {
