@@ -30,7 +30,7 @@ class EmployeeControllerTest {
     @Test
     void testInvalidGetById() throws Exception {
 
-        int employeeId = 1;
+        int employeeId = 10;
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/employees/{id}", employeeId);
 
         MockHttpServletResponse response = mockMvc.perform(request)
@@ -128,7 +128,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void testWithInvalidInputCreateEmployee() throws Exception {
+    void testWithInvalidNameInputCreateEmployee() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -162,6 +162,280 @@ class EmployeeControllerTest {
         Response res = mapper.readValue(body, Response.class);
 
         // Testing the error message
-        assertEquals(res.getMessage(), "Name can not be empty");
+        assertEquals(res.getMessage(), "Name cannot be empty");
     }
+
+    @Test
+    void testWithInvalidAgeInputCreateEmployee() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: Test all the inputs
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Sid", // Passing empty name
+                10,
+                "Kolkata",
+                "Male",
+                "abc@gmail.com",
+                "9876543210",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        String body = response.getContentAsString();
+        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+
+        // Testing status code
+        assertEquals(response.getStatus(), 400);
+
+        Response res = mapper.readValue(body, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Age should be equal or more than 18");
+    }
+
+    @Test
+    void testWithInvalidAddressInputCreateEmployee() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: Test all the inputs
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Sid", // Passing empty name
+                28,
+                "",
+                "Male",
+                "abc@gmail.com",
+                "9876543210",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        String body = response.getContentAsString();
+        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+
+        // Testing status code
+        assertEquals(response.getStatus(), 400);
+
+        Response res = mapper.readValue(body, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Address cannot be empty");
+    }
+
+    @Test
+    void testWithInvalidGenderInputCreateEmployee() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: Test all the inputs
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Sid", // Passing empty name
+                28,
+                "kolkata",
+                "",
+                "abc@gmail.com",
+                "9876543210",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        String body = response.getContentAsString();
+        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+
+        // Testing status code
+        assertEquals(response.getStatus(), 400);
+
+        Response res = mapper.readValue(body, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Gender cannot be empty");
+    }
+
+    @Test
+    void testWithInvalidEmailInputCreateEmployee() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: Test all the inputs
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Sid", // Passing empty name
+                28,
+                "kolkata",
+                "male",
+                "",
+                "9876543210",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        String body = response.getContentAsString();
+        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+
+        // Testing status code
+        assertEquals(response.getStatus(), 400);
+
+        Response res = mapper.readValue(body, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Email cannot be empty");
+    }
+
+    @Test
+    void testWithInvalidPhoneNumberInputCreateEmployee() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: Test all the inputs
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Sid", // Passing empty name
+                28,
+                "kolkata",
+                "male",
+                "abc@gmail.com",
+                "",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        String body = response.getContentAsString();
+        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+
+        // Testing status code
+        assertEquals(response.getStatus(), 400);
+
+        Response res = mapper.readValue(body, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Phone number cannot be empty");
+    }
+
+    @Test
+    void testInvalidUpdateById() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Rahul Prasad",
+                28,
+                "Kolkata",
+                "Male",
+                "abc@gmail.com",
+                "9876543210",
+                true,
+                null,
+                null
+        );
+
+        int employeeId = 1;
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.put("/employees/{id}", employeeId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
+
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
+
+        // Testing status code
+        assertEquals(response.getStatus(), 200);
+
+//        String body = response.getContentAsString();
+//
+//        //Converted Json string to Response.class
+//        Response res = mapper.readValue(body, Response.class);
+//
+//        // Testing the error message
+//        assertEquals(res.getMessage(), String.format("Employee not found by id: %s", employeeId));
+    }
+
+    @Test
+    void testDeleteById() throws Exception {
+    ObjectMapper mapper = new ObjectMapper();
+
+    //TODO: No 2 or more than 2 employees can have same email or phone number
+    EmployeeRequest employeeRequest = new EmployeeRequest(
+            "Rahul Prasad",
+            28,
+            "Kolkata",
+            "Male",
+            "abc@gmail.com",
+            "9876543210",
+            true,
+            null,
+            null
+    );
+
+    MockHttpServletRequestBuilder requestEmployee = MockMvcRequestBuilders.post("/employees")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(employeeRequest));
+
+    String employeeBody = mockMvc.perform(requestEmployee)
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+    Employee actualEmployee = mapper.readValue(employeeBody, Employee.class);
+
+    int employeeId = actualEmployee.getId();
+    MockHttpServletRequestBuilder request = MockMvcRequestBuilders.delete("/employees/{id}", employeeId);
+
+    MockHttpServletResponse response = mockMvc.perform(request)
+            .andReturn()
+            .getResponse();
+
+    // Testing status code
+    assertEquals(response.getStatus(), 200);
+
+//    String body = response.getContentAsString();
+//
+//    //Converted Json string to Response.class
+//    Employee expectedEmployee = mapper.readValue(body, Employee.class);
+//    assertEquals(actualEmployee, expectedEmployee);
+}
+
+
 }
