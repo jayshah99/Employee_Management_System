@@ -19,7 +19,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/employees")
-    public Response addEmployee(@Valid @RequestBody EmployeeRequest request) {
+    public <t> t addEmployee(@Valid @RequestBody EmployeeRequest request) {
         return employeeService.addEmployee(request);
     }
 

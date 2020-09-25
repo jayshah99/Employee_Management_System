@@ -20,7 +20,7 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Response addEmployee(EmployeeRequest request) {
+    public <t> t addEmployee(EmployeeRequest request) {
 //        List<Designation> designation = request.getDesignation();
         if(! checkUniqueEmail(request) && ! checkUniquePhoneNumber(request)){
         Employee employee = new Employee(
@@ -34,13 +34,13 @@ public class EmployeeService {
                 request.getDesignation(),
                 request.getSalary()
         );
-            employeeRepository.save(employee);
-            return new Response(false,("Employee created Successfully"));
+            return (t) employeeRepository.save(employee);
+//            return (t) new Response(false,("Employee created Successfully"));
         }
         if(checkUniqueEmail(request))
-        return new Response(true,("Employee with email already present"));
+        return (t) new Response(true,("Employee with email already present"));
 
-        return new Response(true,("Employee with phone number already present"));
+        return (t) new Response(true,("Employee with phone number already present"));
 
 //        for (Designation desg : designation) {
 //            desg.setEmployee(employee);
