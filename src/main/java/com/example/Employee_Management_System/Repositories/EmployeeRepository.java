@@ -13,5 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
         @Query("select e from Employee e where e.name like %:keyword%")
       List<Employee> findByName( @Param("keyword") String name);
 
-
+        //To check whether the email entered is already present or not
+        boolean existsEmployeeByEmail(String email);
 }

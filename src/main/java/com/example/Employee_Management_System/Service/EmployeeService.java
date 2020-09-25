@@ -20,8 +20,9 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Employee addEmployee(EmployeeRequest request) {
+    public Response addEmployee(EmployeeRequest request) {
 //        List<Designation> designation = request.getDesignation();
+        if(! checkUnique(request)){
         Employee employee = new Employee(
                 request.getName(),
                 request.getAddress(),
@@ -33,11 +34,14 @@ public class EmployeeService {
                 request.getDesignation(),
                 request.getSalary()
         );
+            employeeRepository.save(employee);
+            return new Response(false,("Employee created Successfully"));
+        }
+        return new Response(true,("Employee with email already present"));
 //        for (Designation desg : designation) {
 //            desg.setEmployee(employee);
 //        }
 
-        return employeeRepository.save(employee);
     }
 
     public List<Employee> employeesList() {
@@ -62,7 +66,7 @@ public class EmployeeService {
         throw new NotFoundException("Employee with id : "+id+" not present");
     }
 
-    public Employee update(EmployeeRequest request) {
+    public Response update(EmployeeRequest request) {
         return addEmployee(request);
     }
 
@@ -88,5 +92,10 @@ public class EmployeeService {
         employee.setDesignation(request.getDesignation());
         employee.setSalary(request.getSalary());
         return employeeRepository.save(employee);
+    }
+
+    public boolean checkUnique(EmployeeRequest employeeRequest){
+        boolean temp = employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail());
+        return temp;
     }
 }
