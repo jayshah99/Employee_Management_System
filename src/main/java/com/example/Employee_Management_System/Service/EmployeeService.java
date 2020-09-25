@@ -22,7 +22,7 @@ public class EmployeeService {
 
     public Response addEmployee(EmployeeRequest request) {
 //        List<Designation> designation = request.getDesignation();
-        if(! checkUnique(request)){
+        if(! checkUniqueEmail(request) && ! checkUniquePhoneNumber(request)){
         Employee employee = new Employee(
                 request.getName(),
                 request.getAddress(),
@@ -37,7 +37,11 @@ public class EmployeeService {
             employeeRepository.save(employee);
             return new Response(false,("Employee created Successfully"));
         }
+        if(checkUniqueEmail(request))
         return new Response(true,("Employee with email already present"));
+
+        return new Response(true,("Employee with phone number already present"));
+
 //        for (Designation desg : designation) {
 //            desg.setEmployee(employee);
 //        }
@@ -94,8 +98,10 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public boolean checkUnique(EmployeeRequest employeeRequest){
-        boolean temp = employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail());
-        return temp;
+    public boolean checkUniqueEmail(EmployeeRequest employeeRequest){
+        return employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail());
+    }
+    public boolean checkUniquePhoneNumber(EmployeeRequest employeeRequest){
+        return employeeRepository.existsEmployeeByPhoneNumber(employeeRequest.getPhoneNumber());
     }
 }

@@ -15,4 +15,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
         //To check whether the email entered is already present or not
         boolean existsEmployeeByEmail(String email);
+
+        boolean existsEmployeeByPhoneNumber(String phoneNumber);
 }
