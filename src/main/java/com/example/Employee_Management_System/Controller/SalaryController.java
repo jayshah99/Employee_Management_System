@@ -54,7 +54,7 @@ public class SalaryController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/salaries/max")
-    public Employee maxSalary(){
+    public List<Employee> maxSalary(){
         return salaryService.maxSalary();
     }
 }

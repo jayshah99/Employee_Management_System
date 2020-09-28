@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,9 +60,15 @@ public class SalaryService {
                 .orElseThrow(() -> new NotFoundException(String.format("Salary not found by id: %s", id)));
     }
 
-    public Employee maxSalary() {
-        Salary salary = salaryRepository.maxSalary();
-        return employeeRepository.findById(salary.getEmpid()).get();
+    public List<Employee> maxSalary() {
+        List<Salary> salaries = salaryRepository.maxSalary();
+        List<Employee> employees = new ArrayList<Employee>();
+
+        for (Salary salary : salaries)
+        {
+            employees.add(employeeRepository.findById(salary.getEmpid()).get());
+        }
+        return employees;
     }
 }
 
