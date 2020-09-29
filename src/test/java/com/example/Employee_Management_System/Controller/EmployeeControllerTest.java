@@ -345,9 +345,6 @@ class EmployeeControllerTest {
         String body = response.getContentAsString();
         LOGGER.info("### testCreateEmployee1 ### Response: {}", body);
 
-        // Testing status code
-//        assertEquals(response.getStatus(), 201);
-
         EmployeeRequest employeeRequest1 = new EmployeeRequest(
                 "Jay", // Passing empty name
                 28,
@@ -374,10 +371,10 @@ class EmployeeControllerTest {
         // Testing status code
         assertEquals(response1.getStatus(), 406);
 //
-//        Response res = mapper.readValue(body, Response.class);
-//
-//        // Testing the error message
-//        assertEquals(res.getMessage(), "Employee with phone number already present");
+        Response res = mapper.readValue(body1, Response.class);
+
+        // Testing the error message
+        assertEquals(res.getMessage(), "Employee with phone number already present");
     }
 
     @Test
