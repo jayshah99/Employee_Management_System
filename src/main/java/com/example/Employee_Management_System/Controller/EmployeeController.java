@@ -19,7 +19,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/employees")
-    public <t> t addEmployee(@Valid @RequestBody EmployeeRequest request) {
+    public Employee addEmployee(@Valid @RequestBody EmployeeRequest request) {
         return employeeService.addEmployee(request);
     }
 
@@ -42,7 +42,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/employees")
-    public Response update(@RequestBody EmployeeRequest request) {
+    public Employee update(@RequestBody EmployeeRequest request) {
         return employeeService.update(request);
     }
 

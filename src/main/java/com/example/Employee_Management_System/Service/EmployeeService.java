@@ -4,6 +4,7 @@ import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
+import com.example.Employee_Management_System.util.Exception.EmailOrPhoneNumberAlreadyExistException;
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,9 +21,10 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public <t> t addEmployee(EmployeeRequest request) {
-//        List<Designation> designation = request.getDesignation();
-        if(! checkUniqueEmail(request) && ! checkUniquePhoneNumber(request)){
+    public Employee addEmployee(EmployeeRequest request) {
+        boolean email = checkUniqueEmail(request);
+        boolean phone = checkUniquePhoneNumber(request);
+        if(!email && !phone){
         Employee employee = new Employee(
                 request.getName(),
                 request.getAddress(),
@@ -34,17 +36,13 @@ public class EmployeeService {
                 request.getDesignation(),
                 request.getSalary()
         );
-            return (t) employeeRepository.save(employee);
-//            return (t) new Response(false,("Employee created Successfully"));
+            return employeeRepository.save(employee);
         }
-        if(checkUniqueEmail(request))
-        return (t) new Response(true,("Employee with email already present"));
+        if(email)
+            throw new EmailOrPhoneNumberAlreadyExistException("Employee with Email already present");
 
-        return (t) new Response(true,("Employee with phone number already present"));
+        throw new EmailOrPhoneNumberAlreadyExistException("Employee with phone number already present");
 
-//        for (Designation desg : designation) {
-//            desg.setEmployee(employee);
-//        }
 
     }
 
@@ -70,7 +68,7 @@ public class EmployeeService {
         throw new NotFoundException("Employee with id : "+id+" not present");
     }
 
-    public Response update(EmployeeRequest request) {
+    public Employee update(EmployeeRequest request) {
         return addEmployee(request);
     }
 
@@ -95,7 +93,9 @@ public class EmployeeService {
         employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
         employee.setSalary(request.getSalary());
-        return employeeRepository.save(employee);
+        if (employeeRepository.updatedEmailOrPhoneNumberExists(request.getEmail(),request.getPhoneNumber(), id).isEmpty())
+            return employeeRepository.save(employee);
+        throw new EmailOrPhoneNumberAlreadyExistException("Employee with email or phone number already present");
     }
 
     public boolean checkUniqueEmail(EmployeeRequest employeeRequest){
