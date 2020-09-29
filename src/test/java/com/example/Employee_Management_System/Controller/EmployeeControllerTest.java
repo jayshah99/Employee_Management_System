@@ -290,8 +290,8 @@ class EmployeeControllerTest {
                 28,
                 "kolkata",
                 "male",
-                "aefgsgsgs@gmail.com",
-                "8216543210",
+                "abcdeasddfgdi@gmail.com",
+                "9116543560",
                 true,
                 null,
                 null
@@ -300,21 +300,43 @@ class EmployeeControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/employees")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(employeeRequest));
-
         MockHttpServletResponse response = mockMvc.perform(request)
                 .andReturn()
                 .getResponse();
 
         String body = response.getContentAsString();
-        LOGGER.info("### testCreateEmployee ### Response: {}", body);
+        LOGGER.info("### testCreateEmployee1 ### Response: {}", body);
+
+        EmployeeRequest employeeRequest1 = new EmployeeRequest(
+                "Jay", // Passing empty name
+                28,
+                "kolkata",
+                "male",
+                "abcdeasddfgdi@gmail.com",
+                "9006543100",
+                true,
+                null,
+                null
+        );
+
+        MockHttpServletRequestBuilder request1 = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest1));
+
+        MockHttpServletResponse response1 = mockMvc.perform(request1)
+                .andReturn()
+                .getResponse();
+
+        String body1 = response1.getContentAsString();
+        LOGGER.info("### testCreateEmployee2 ### Response: {}", body1);
 
         // Testing status code
-        assertEquals(response.getStatus(), 201);
-
-        Response res = mapper.readValue(body, Response.class);
+        assertEquals(response1.getStatus(), 406);
+//
+        Response res = mapper.readValue(body1, Response.class);
 
         // Testing the error message
-        assertEquals(res.getMessage(), "Employee with email already present");
+        assertEquals(res.getMessage(), "Employee with Email already present");
     }
 
     @Test
