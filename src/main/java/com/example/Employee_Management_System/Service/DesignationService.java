@@ -52,11 +52,10 @@ public class DesignationService {
     }
 
 
-    public Designation getById(int id)
-        {
-            return designationRepository.findById(id)
-                    .orElseThrow(() -> new NotFoundException(String.format("Designation not found by id: %s", id)));
-        }
+    public Designation getById(int id) {
+        return designationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Designation not found by id: %s", id)));
+    }
 }
 
 

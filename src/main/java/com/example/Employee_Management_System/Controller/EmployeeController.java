@@ -29,8 +29,8 @@ public class EmployeeController {
         return employeeService.employeesList();
     }
 
-    @GetMapping(path = "/employees", params = {"from","size"})
-    public List<Employee> getPaginatedEmployees(@RequestParam(value= "from") int from, @RequestParam(value="size") int size ) {
+    @GetMapping(path = "/employees", params = {"from", "size"})
+    public List<Employee> getPaginatedEmployees(@RequestParam(value = "from") int from, @RequestParam(value = "size") int size) {
         return employeeService.findPaginated(from, size);
     }
 

@@ -25,5 +25,4 @@ public class DesignationRequest {
     private boolean current;
 
 
-
 }

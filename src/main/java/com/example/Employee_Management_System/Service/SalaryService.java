@@ -55,7 +55,7 @@ public class SalaryService {
     }
 
 
-    public Salary getById(int id){
+    public Salary getById(int id) {
         return salaryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Salary not found by id: %s", id)));
     }
@@ -64,8 +64,7 @@ public class SalaryService {
         List<Salary> salaries = salaryRepository.maxSalary();
         List<Employee> employees = new ArrayList<Employee>();
 
-        for (Salary salary : salaries)
-        {
+        for (Salary salary : salaries) {
             employees.add(employeeRepository.findById(salary.getEmpid()).get());
         }
         return employees;

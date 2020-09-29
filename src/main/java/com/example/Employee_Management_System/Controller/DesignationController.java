@@ -23,8 +23,8 @@ public class DesignationController {
         return designationService.addDesignation(request);
     }
 
-    @GetMapping(path= "/designations" ,params = {"from","size"})
-    public List<Designation> getPaginated(@RequestParam(value= "from") int from, @RequestParam(value="size") int size) {
+    @GetMapping(path = "/designations", params = {"from", "size"})
+    public List<Designation> getPaginated(@RequestParam(value = "from") int from, @RequestParam(value = "size") int size) {
         return designationService.findPaginated(from, size);
     }
 
@@ -42,7 +42,7 @@ public class DesignationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/designations")
-    public Designation update(@RequestBody DesignationRequest request){
+    public Designation update(@RequestBody DesignationRequest request) {
         return designationService.update(request);
     }
 

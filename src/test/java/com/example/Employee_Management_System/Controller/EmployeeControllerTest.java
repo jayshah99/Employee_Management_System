@@ -463,48 +463,48 @@ class EmployeeControllerTest {
 
     @Test
     void testDeleteById() throws Exception {
-    ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-    //TODO: No 2 or more than 2 employees can have same email or phone number
-    EmployeeRequest employeeRequest = new EmployeeRequest(
-            "Rahul Prasad",
-            28,
-            "Kolkata",
-            "Male",
-            "aasabc@gmail.com",
-            "9814143210",
-            true,
-            null,
-            null
-    );
+        //TODO: No 2 or more than 2 employees can have same email or phone number
+        EmployeeRequest employeeRequest = new EmployeeRequest(
+                "Rahul Prasad",
+                28,
+                "Kolkata",
+                "Male",
+                "aasabc@gmail.com",
+                "9814143210",
+                true,
+                null,
+                null
+        );
 
-    MockHttpServletRequestBuilder requestEmployee = MockMvcRequestBuilders.post("/employees")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(mapper.writeValueAsString(employeeRequest));
+        MockHttpServletRequestBuilder requestEmployee = MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(employeeRequest));
 
-    String employeeBody = mockMvc.perform(requestEmployee)
-            .andReturn()
-            .getResponse()
-            .getContentAsString();
+        String employeeBody = mockMvc.perform(requestEmployee)
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
-    Employee actualEmployee = mapper.readValue(employeeBody, Employee.class);
+        Employee actualEmployee = mapper.readValue(employeeBody, Employee.class);
 
-    int employeeId = actualEmployee.getId();
-    MockHttpServletRequestBuilder request = MockMvcRequestBuilders.delete("/employees/{id}", employeeId);
+        int employeeId = actualEmployee.getId();
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.delete("/employees/{id}", employeeId);
 
-    MockHttpServletResponse response = mockMvc.perform(request)
-            .andReturn()
-            .getResponse();
+        MockHttpServletResponse response = mockMvc.perform(request)
+                .andReturn()
+                .getResponse();
 
-    // Testing status code
-    assertEquals(response.getStatus(), 200);
+        // Testing status code
+        assertEquals(response.getStatus(), 200);
 
 //    String body = response.getContentAsString();
 //
 //    //Converted Json string to Response.class
 //    Employee expectedEmployee = mapper.readValue(body, Employee.class);
 //    assertEquals(actualEmployee, expectedEmployee);
-}
+    }
 
 
 }

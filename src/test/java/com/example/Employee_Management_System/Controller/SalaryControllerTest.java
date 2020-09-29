@@ -50,7 +50,7 @@ class SalaryControllerTest {
         Response res = mapper.readValue(body, Response.class);
 
         // Testing the error message
-        assertEquals(res.getMessage(), String.format("Salary not found by id: %s",salaryId));
+        assertEquals(res.getMessage(), String.format("Salary not found by id: %s", salaryId));
     }
 
     @Test
@@ -79,7 +79,7 @@ class SalaryControllerTest {
         Salary actualSalary = mapper.readValue(salaryBody, Salary.class);
 
         int salaryId = actualSalary.getId();
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/salaries/{id}",salaryId);
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/salaries/{id}", salaryId);
 
         MockHttpServletResponse response = mockMvc.perform(request)
                 .andReturn()

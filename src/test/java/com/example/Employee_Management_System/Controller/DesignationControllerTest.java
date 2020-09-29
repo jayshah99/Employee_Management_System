@@ -61,7 +61,7 @@ class DesignationControllerTest {
         //TODO: No 2 or more than 2 employees can have same email or phone number
         DesignationRequest designationRequest = new DesignationRequest(
                 "code",
-                 date,
+                date,
                 date1,
                 true
         );

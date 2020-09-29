@@ -51,16 +51,16 @@ public class Employee {
     @JoinColumn(name = "empid", referencedColumnName = "id")
     private List<Salary> salary;
 
-    public Employee(String name, String address,int age, String gender, String email, String phoneNumber,boolean currentlyWorking,List<Designation> designation, List<Salary> salary) {
+    public Employee(String name, String address, int age, String gender, String email, String phoneNumber, boolean currentlyWorking, List<Designation> designation, List<Salary> salary) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.gender = gender;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.currentlyWorking=currentlyWorking;
+        this.currentlyWorking = currentlyWorking;
         this.designation = designation;
-        this.salary=salary;
+        this.salary = salary;
     }
 
 
