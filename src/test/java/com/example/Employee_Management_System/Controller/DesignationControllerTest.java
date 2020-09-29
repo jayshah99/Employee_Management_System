@@ -1,10 +1,8 @@
 package com.example.Employee_Management_System.Controller;
 
 import com.example.Employee_Management_System.Resources.model.Designation;
-import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.DesignationRequest;
-import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
