@@ -4,6 +4,7 @@ import com.example.Employee_Management_System.Repositories.DesignationRepository
 import com.example.Employee_Management_System.Resources.model.Designation;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.request.DesignationRequest;
+import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,8 +52,10 @@ public class DesignationService {
     }
 
 
-    public Designation getById(int id){
-        return designationRepository.findById(id).get();
+    public Designation getById(int id) {
+        return designationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Designation not found by id: %s", id)));
     }
 }
+
 

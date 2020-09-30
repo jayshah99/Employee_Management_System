@@ -1,6 +1,5 @@
 package com.example.Employee_Management_System.Resources.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
+
 public class Employee {
     @Id
     @Column
@@ -32,10 +32,10 @@ public class Employee {
     @Column
     private String gender;
 
-    @Column
+    @Column(unique = true, nullable = false, length = 50)
     private String email;
 
-    @Column
+    @Column(unique = true, nullable = false, length = 20)
     private String phoneNumber;
 
     @Column
@@ -51,16 +51,16 @@ public class Employee {
     @JoinColumn(name = "empid", referencedColumnName = "id")
     private List<Salary> salary;
 
-    public Employee(String name, String address,int age, String gender, String email, String phoneNumber,boolean currentlyWorking,List<Designation> designation, List<Salary> salary) {
+    public Employee(String name, String address, int age, String gender, String email, String phoneNumber, boolean currentlyWorking, List<Designation> designation, List<Salary> salary) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.gender = gender;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.currentlyWorking=currentlyWorking;
+        this.currentlyWorking = currentlyWorking;
         this.designation = designation;
-        this.salary=salary;
+        this.salary = salary;
     }
 
 

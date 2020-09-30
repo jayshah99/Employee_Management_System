@@ -18,11 +18,20 @@ public class CustomExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Response> handleInvalidRequest(NotFoundException ex) {
         return new ResponseEntity<>(
                 new Response(true, ex.getMessage()),
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(EmailOrPhoneNumberAlreadyExistException.class)
+    public ResponseEntity<Response> handleDuplicateValueRequest(EmailOrPhoneNumberAlreadyExistException ex) {
+        return new ResponseEntity<>(
+                new Response(true, ex.getMessage()),
+                HttpStatus.NOT_ACCEPTABLE
         );
     }
 

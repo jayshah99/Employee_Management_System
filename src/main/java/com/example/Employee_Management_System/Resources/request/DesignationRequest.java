@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -14,6 +15,7 @@ import java.sql.Date;
 public class DesignationRequest {
 
     @NotNull(message = "Designation cannot be null")
+    @NotEmpty(message = "Designation cannot be empty")
     private String designation;
 
     private Date startDate;
@@ -21,5 +23,6 @@ public class DesignationRequest {
     private Date endDate;
 
     private boolean current;
+
 
 }

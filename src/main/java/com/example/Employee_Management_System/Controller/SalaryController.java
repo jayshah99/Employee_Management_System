@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,12 +19,12 @@ public class SalaryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/salaries")
-    public Salary addSalary(@RequestBody SalaryRequest request) {
+    public Salary addSalary(@Valid @RequestBody SalaryRequest request) {
         return salaryService.addSalary(request);
     }
 
-    @GetMapping(path= "/salaries",params = {"from","size"})
-    public List<Salary> getPaginatedEmployees(@RequestParam(value= "from") int from, @RequestParam(value="size") int size) {
+    @GetMapping(path = "/salaries", params = {"from", "size"})
+    public List<Salary> getPaginatedEmployees(@RequestParam(value = "from") int from, @RequestParam(value = "size") int size) {
         return salaryService.findPaginated(from, size);
     }
 
@@ -41,7 +42,7 @@ public class SalaryController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/salaries")
-    public Salary update(@RequestBody SalaryRequest request){
+    public Salary update(@RequestBody SalaryRequest request) {
         return salaryService.update(request);
     }
 
@@ -53,7 +54,7 @@ public class SalaryController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/salaries/max")
-    public Employee maxSalary(){
+    public List<Employee> maxSalary() {
         return salaryService.maxSalary();
     }
 }

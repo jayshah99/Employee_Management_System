@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -12,7 +14,7 @@ import java.sql.Date;
 @NoArgsConstructor
 public class SalaryRequest {
 
-    @NotNull(message = "Salary cannot be null")
+    @Min(value = 1, message = "Salary should be more than 0")
     private int salary;
 
     private Date startDate;

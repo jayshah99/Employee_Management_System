@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,12 +19,12 @@ public class DesignationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/designations")
-    public Designation addDesignation(@RequestBody DesignationRequest request) {
+    public Designation addDesignation(@Valid @RequestBody DesignationRequest request) {
         return designationService.addDesignation(request);
     }
 
-    @GetMapping(path= "/designations" ,params = {"from","size"})
-    public List<Designation> getPaginated(@RequestParam(value= "from") int from, @RequestParam(value="size") int size) {
+    @GetMapping(path = "/designations", params = {"from", "size"})
+    public List<Designation> getPaginated(@RequestParam(value = "from") int from, @RequestParam(value = "size") int size) {
         return designationService.findPaginated(from, size);
     }
 
@@ -41,7 +42,7 @@ public class DesignationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/designations")
-    public Designation update(@RequestBody DesignationRequest request){
+    public Designation update(@RequestBody DesignationRequest request) {
         return designationService.update(request);
     }
 

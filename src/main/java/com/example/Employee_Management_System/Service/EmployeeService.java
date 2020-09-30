@@ -4,6 +4,7 @@ import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
+import com.example.Employee_Management_System.util.Exception.EmailOrPhoneNumberAlreadyExistException;
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,23 +23,28 @@ public class EmployeeService {
     EmployeeRepository employeeRepository;
 
     public Employee addEmployee(EmployeeRequest request) {
-//        List<Designation> designation = request.getDesignation();
-        Employee employee = new Employee(
-                request.getName(),
-                request.getAddress(),
-                request.getAge(),
-                request.getGender(),
-                request.getEmail(),
-                request.getPhoneNumber(),
-                request.isCurrentlyWorking(),
-                request.getDesignation(),
-                request.getSalary()
-        );
-//        for (Designation desg : designation) {
-//            desg.setEmployee(employee);
-//        }
+        boolean email = checkUniqueEmail(request);
+        boolean phone = checkUniquePhoneNumber(request);
+        if (!email && !phone) {
+            Employee employee = new Employee(
+                    request.getName(),
+                    request.getAddress(),
+                    request.getAge(),
+                    request.getGender(),
+                    request.getEmail(),
+                    request.getPhoneNumber(),
+                    request.isCurrentlyWorking(),
+                    request.getDesignation(),
+                    request.getSalary()
+            );
+            return employeeRepository.save(employee);
+        }
+        if (email)
+            throw new EmailOrPhoneNumberAlreadyExistException("Employee with Email already present");
 
-        return employeeRepository.save(employee);
+        throw new EmailOrPhoneNumberAlreadyExistException("Employee with phone number already present");
+
+
     }
 
     public List<Employee> employeesList() {
@@ -51,15 +58,16 @@ public class EmployeeService {
 
         return pagedResult.toList();
     }
+
     public Response delete(int id) {
 
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent()) {
             employeeRepository.deleteById(id);
-            return new Response(false,("Employee with id:"+ id +" Deleted Successfully"));
+            return new Response(false, ("Employee with id:" + id + " Deleted Successfully"));
         }
 
-        throw new NotFoundException("Employee with id : "+id+" not present");
+        throw new NotFoundException("Employee with id : " + id + " not present");
     }
 
     public Employee update(EmployeeRequest request) {
@@ -67,11 +75,11 @@ public class EmployeeService {
     }
 
     public List<Employee> getByName(String name) {
-        System.out.println("name = " +name);
+        System.out.println("name = " + name);
         return employeeRepository.findByName(name);
     }
 
-    public Employee getById(int id){
+    public Employee getById(int id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Employee not found by id: %s", id)));
     }
@@ -87,6 +95,16 @@ public class EmployeeService {
         employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
         employee.setSalary(request.getSalary());
-        return employeeRepository.save(employee);
+        if (employeeRepository.updatedEmailOrPhoneNumberExists(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
+            return employeeRepository.save(employee);
+        throw new EmailOrPhoneNumberAlreadyExistException("Employee with email or phone number already present");
+    }
+
+    public boolean checkUniqueEmail(EmployeeRequest employeeRequest) {
+        return employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail());
+    }
+
+    public boolean checkUniquePhoneNumber(EmployeeRequest employeeRequest) {
+        return employeeRepository.existsEmployeeByPhoneNumber(employeeRequest.getPhoneNumber());
     }
 }

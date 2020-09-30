@@ -5,12 +5,14 @@ import com.example.Employee_Management_System.Repositories.SalaryRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.model.Salary;
 import com.example.Employee_Management_System.Resources.request.SalaryRequest;
+import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,13 +55,19 @@ public class SalaryService {
     }
 
 
-    public Salary getById(int id){
-        return salaryRepository.findById(id).get();
+    public Salary getById(int id) {
+        return salaryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Salary not found by id: %s", id)));
     }
 
-    public Employee maxSalary() {
-        Salary salary = salaryRepository.maxSalary();
-        return employeeRepository.findById(salary.getEmpid()).get();
+    public List<Employee> maxSalary() {
+        List<Salary> salaries = salaryRepository.maxSalary();
+        List<Employee> employees = new ArrayList<Employee>();
+
+        for (Salary salary : salaries) {
+            employees.add(employeeRepository.findById(salary.getEmpid()).get());
+        }
+        return employees;
     }
 }
 
