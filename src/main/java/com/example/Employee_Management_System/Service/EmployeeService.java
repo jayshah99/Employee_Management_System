@@ -95,7 +95,7 @@ public class EmployeeService {
         employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
         employee.setSalary(request.getSalary());
-        if (employeeRepository.updatedEmailOrPhoneNumberExists(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
+        if (employeeRepository.findByEmailOrPhoneNumberAndNotEqualsId(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
             return employeeRepository.save(employee);
         throw new EmailOrPhoneNumberAlreadyExistException("Employee with email or phone number already present");
     }
