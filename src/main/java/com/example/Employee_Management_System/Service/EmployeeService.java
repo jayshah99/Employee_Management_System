@@ -15,6 +15,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 @Service
 public class EmployeeService {
@@ -75,7 +78,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getByName(String name) {
-        System.out.println("name = " + name);
+        LOGGER.info(String.format("name = %s",name));
         return employeeRepository.findByName(name);
     }
 
