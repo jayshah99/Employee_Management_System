@@ -62,12 +62,12 @@ public class SalaryService {
 
     public List<Employee> maxSalary() {
         List<Salary> salaries = salaryRepository.maxSalary();
-        List<Employee> employees = new ArrayList<Employee>();
+        List<Integer> empId = new ArrayList<Integer>();
 
         for (Salary salary : salaries) {
-            employees.add(employeeRepository.findById(salary.getEmpid()).get());
+           empId.add(salary.getEmpid());
         }
-        return employees;
+        return employeeRepository.findByIdIn(empId);
     }
 }
 
