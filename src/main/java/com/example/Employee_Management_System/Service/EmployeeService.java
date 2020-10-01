@@ -4,7 +4,7 @@ import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
-import com.example.Employee_Management_System.util.Exception.EmailOrPhoneNumberAlreadyExistException;
+import com.example.Employee_Management_System.util.Exception.EntityAlreadyExistException;
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,9 +40,9 @@ public class EmployeeService {
             return employeeRepository.save(employee);
         }
         if (email)
-            throw new EmailOrPhoneNumberAlreadyExistException("Employee with Email already present");
+            throw new EntityAlreadyExistException("Employee with Email already present");
 
-        throw new EmailOrPhoneNumberAlreadyExistException("Employee with phone number already present");
+        throw new EntityAlreadyExistException("Employee with phone number already present");
 
 
     }
@@ -97,7 +97,7 @@ public class EmployeeService {
         employee.setSalary(request.getSalary());
         if (employeeRepository.findByEmailOrPhoneNumberAndNotEqualsId(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
             return employeeRepository.save(employee);
-        throw new EmailOrPhoneNumberAlreadyExistException("Employee with email or phone number already present");
+        throw new EntityAlreadyExistException("Employee with email or phone number already present");
     }
 
     public boolean checkUniqueEmail(EmployeeRequest employeeRequest) {
