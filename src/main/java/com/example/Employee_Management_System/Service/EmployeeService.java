@@ -64,10 +64,10 @@ public class EmployeeService {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent()) {
             employeeRepository.deleteById(id);
-            return new Response(false, ("Employee with id:" + id + " Deleted Successfully"));
+            return new Response(false,String.format("Employee with id: %s Deleted Successfully",id));
         }
 
-        throw new NotFoundException("Employee with id : " + id + " not present");
+        throw new NotFoundException(String.format("Employee with id : %s not present",id));
     }
 
     public Employee update(EmployeeRequest request) {
