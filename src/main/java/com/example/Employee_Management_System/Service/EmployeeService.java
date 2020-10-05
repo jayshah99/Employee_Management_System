@@ -4,7 +4,7 @@ import com.example.Employee_Management_System.Repositories.EmployeeRepository;
 import com.example.Employee_Management_System.Resources.model.Employee;
 import com.example.Employee_Management_System.Resources.pojo.Response;
 import com.example.Employee_Management_System.Resources.request.EmployeeRequest;
-import com.example.Employee_Management_System.util.Exception.EmailOrPhoneNumberAlreadyExistException;
+import com.example.Employee_Management_System.util.Exception.EntityAlreadyExistException;
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +15,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 @Service
 public class EmployeeService {
@@ -40,9 +43,9 @@ public class EmployeeService {
             return employeeRepository.save(employee);
         }
         if (email)
-            throw new EmailOrPhoneNumberAlreadyExistException("Employee with Email already present");
+            throw new EntityAlreadyExistException("Employee with Email already present");
 
-        throw new EmailOrPhoneNumberAlreadyExistException("Employee with phone number already present");
+        throw new EntityAlreadyExistException("Employee with phone number already present");
 
 
     }
@@ -64,10 +67,10 @@ public class EmployeeService {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent()) {
             employeeRepository.deleteById(id);
-            return new Response(false, ("Employee with id:" + id + " Deleted Successfully"));
+            return new Response(false,String.format("Employee with id: %s Deleted Successfully",id));
         }
 
-        throw new NotFoundException("Employee with id : " + id + " not present");
+        throw new NotFoundException(String.format("Employee with id : %s not present",id));
     }
 
     public Employee update(EmployeeRequest request) {
@@ -75,7 +78,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getByName(String name) {
-        System.out.println("name = " + name);
+        LOGGER.info(String.format("name = %s",name));
         return employeeRepository.findByName(name);
     }
 
@@ -95,9 +98,9 @@ public class EmployeeService {
         employee.setCurrentlyWorking(request.isCurrentlyWorking());
         employee.setDesignation(request.getDesignation());
         employee.setSalary(request.getSalary());
-        if (employeeRepository.updatedEmailOrPhoneNumberExists(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
+        if (employeeRepository.findByEmailOrPhoneNumberAndNotEqualsId(request.getEmail(), request.getPhoneNumber(), id).isEmpty())
             return employeeRepository.save(employee);
-        throw new EmailOrPhoneNumberAlreadyExistException("Employee with email or phone number already present");
+        throw new EntityAlreadyExistException("Employee with email or phone number already present");
     }
 
     public boolean checkUniqueEmail(EmployeeRequest employeeRequest) {

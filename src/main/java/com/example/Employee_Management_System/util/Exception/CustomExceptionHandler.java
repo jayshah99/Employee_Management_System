@@ -27,8 +27,8 @@ public class CustomExceptionHandler {
         );
     }
 
-    @ExceptionHandler(EmailOrPhoneNumberAlreadyExistException.class)
-    public ResponseEntity<Response> handleDuplicateValueRequest(EmailOrPhoneNumberAlreadyExistException ex) {
+    @ExceptionHandler(EntityAlreadyExistException.class)
+    public ResponseEntity<Response> handleDuplicateValueRequest(EntityAlreadyExistException ex) {
         return new ResponseEntity<>(
                 new Response(true, ex.getMessage()),
                 HttpStatus.NOT_ACCEPTABLE
