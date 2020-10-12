@@ -8,16 +8,12 @@ import com.example.Employee_Management_System.util.Exception.EntityAlreadyExistE
 import com.example.Employee_Management_System.util.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 @Service
 public class EmployeeService {
@@ -78,7 +74,6 @@ public class EmployeeService {
     }
 
     public List<Employee> getByName(String name) {
-        LOGGER.info(String.format("name = %s",name));
         return employeeRepository.findByName(name);
     }
 
