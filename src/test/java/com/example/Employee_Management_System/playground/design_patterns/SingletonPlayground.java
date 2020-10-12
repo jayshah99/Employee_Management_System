@@ -13,6 +13,8 @@ public class SingletonPlayground {
         Singleton class have issue in multi threaded environment
         How we can fix this ?
         1. make the static method in the singleton class synchronized
+            - it will create thread block
+        2. we can optimize with Double check locking method
          */
 
         singletonWithThread("singletonClass1");

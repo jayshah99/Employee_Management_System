@@ -6,12 +6,19 @@ public class SingletonClass {
 
     private SingletonClass() {}
 
-   public synchronized static SingletonClass getInstance() {
+   public static SingletonClass getInstance() {
 
-        if (singletonClass == null) {
-            System.out.println("Instantiating object");
-            singletonClass = new SingletonClass();
-        }
+       System.out.println("SingletonClass Thread name: " + Thread.currentThread().getName());
+
+       //Double check locking
+       if (singletonClass == null) { // may be 2 or more thread trying to access singletonClass simoultaenously
+           synchronized (SingletonClass.class) {
+               if (singletonClass == null) {
+                   System.out.println("Instantiating object");
+                   singletonClass = new SingletonClass();
+               }
+           }
+       }
 
         return singletonClass;
    }
