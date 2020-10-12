@@ -9,11 +9,12 @@ public class SingletonPlayground {
         //showHashcodeSample();
 
         /*
-        Eager approach or eager instantiation of the object
-        - it's load the object pr create the object before even accessing the object
+        Lazy object instantiation of singleton class
+        - it will create an object for the first time on demand
          */
-        SingletonClass singletonClass1 = SingletonClass.singletonClass;
-        SingletonClass singletonClass2 = SingletonClass.singletonClass;
+
+        SingletonClass singletonClass1 = SingletonClass.getInstance();
+        SingletonClass singletonClass2 = SingletonClass.getInstance();
         SingletonClass singletonClass3 = singletonClass1;
 
         System.out.println("Hashcode of singletonClass1:" + singletonClass1.hashCode());
