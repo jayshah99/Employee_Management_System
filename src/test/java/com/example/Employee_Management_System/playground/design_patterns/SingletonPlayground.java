@@ -1,4 +1,5 @@
 package com.example.Employee_Management_System.playground.design_patterns;
+
 /*
 1. only going to have 1 single instance
 2. we can create multiple objects
@@ -9,17 +10,24 @@ public class SingletonPlayground {
         //showHashcodeSample();
 
         /*
-        Lazy object instantiation of singleton class
-        - it will create an object for the first time on demand
+        Singleton class have issue in multi threaded environment
+        How we can fix this ?
+        1. make the static method in the singleton class synchronized
          */
 
-        SingletonClass singletonClass1 = SingletonClass.getInstance();
-        SingletonClass singletonClass2 = SingletonClass.getInstance();
-        SingletonClass singletonClass3 = singletonClass1;
+        singletonWithThread("singletonClass1");
+        singletonWithThread("singletonClass2");
+        singletonWithThread("singletonClass3");
+    }
 
-        System.out.println("Hashcode of singletonClass1:" + singletonClass1.hashCode());
-        System.out.println("Hashcode of singletonClass2:" + singletonClass2.hashCode());
-        System.out.println("Hashcode of singletonClass3:" + singletonClass3.hashCode());
+    public static void singletonWithThread(String threadName) {
+        Thread thread = new Thread(() -> {
+            SingletonClass singletonClass = SingletonClass.getInstance();
+            System.out.println("\nHashcode of" +
+                    " Thread: " + Thread.currentThread().getName() +
+                    " ==> " + singletonClass.hashCode());
+        }, threadName);
+        thread.start();
     }
 
     private static void showHashcodeSample() {

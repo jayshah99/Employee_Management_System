@@ -6,7 +6,7 @@ public class SingletonClass {
 
     private SingletonClass() {}
 
-   public static SingletonClass getInstance() {
+   public synchronized static SingletonClass getInstance() {
 
         if (singletonClass == null) {
             System.out.println("Instantiating object");
