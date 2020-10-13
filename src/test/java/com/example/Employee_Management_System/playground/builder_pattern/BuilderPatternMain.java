@@ -1,5 +1,6 @@
 package com.example.Employee_Management_System.playground.builder_pattern;
 
+import java.util.Date;
 import java.util.OptionalDouble;
 import java.util.stream.IntStream;
 
@@ -8,6 +9,20 @@ public class BuilderPatternMain {
     public static void main(String[] args) {
 
         //exampleOfChainOfMethods();
+        Employee employee1 = new Employee(1, "Rahul", "Software Developer", new Date());
+
+        /*Employee employee2 = new Employee();
+        employee2.setDesignation("Software developer");
+        employee2.setId(2);
+
+        employee2.setDesignation("Software Engineer");*/
+
+        Employee employee = new Employee.EmployeeBuilder()
+                .id(1)
+                .designation("adw")
+                .build();
+
+
     }
 
     private static void exampleOfChainOfMethods() {
