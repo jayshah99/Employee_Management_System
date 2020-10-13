@@ -16,6 +16,10 @@ public class Employee {
         this.joniDate = joniDate;
     }
 
+    public static EmployeeBuilder builder() {
+        return new EmployeeBuilder();
+    }
+
     public static class EmployeeBuilder {
 
         private int id;

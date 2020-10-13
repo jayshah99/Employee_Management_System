@@ -17,9 +17,15 @@ public class BuilderPatternMain {
 
         employee2.setDesignation("Software Engineer");*/
 
+
         Employee employee = new Employee.EmployeeBuilder()
                 .id(1)
                 .designation("adw")
+                .build();
+
+        Employee employee2 = Employee.builder()
+                .id(1)
+                .designation("qwdwe")
                 .build();
 
 
