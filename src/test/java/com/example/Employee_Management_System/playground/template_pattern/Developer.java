@@ -1,19 +1,17 @@
 package com.example.Employee_Management_System.playground.template_pattern;
 
-public class Developer extends EmployeeTemplate {
+public class Developer extends Employee implements EmployeeTemplate {
 
-    private final Employee employee;
     private final LeaveInformation leaveInformation;
 
-    public Developer(Employee employee, LeaveInformation leaveInformation) {
-        this.employee = employee;
+    public Developer(String name, String designation, long salary, LeaveInformation leaveInformation) {
+        super(name, designation, salary);
         this.leaveInformation = leaveInformation;
     }
 
-
     @Override
-    public long getSalary() {
-        return employee.getSalary();
+    public long getMonthlySalary() {
+        return getSalary();
     }
 
     @Override

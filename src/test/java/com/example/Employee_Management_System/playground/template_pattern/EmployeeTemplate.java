@@ -1,13 +1,13 @@
 package com.example.Employee_Management_System.playground.template_pattern;
 
-public abstract class EmployeeTemplate {
+public interface EmployeeTemplate {
 
-    public abstract long getSalary();
-    public abstract long getLeaveCount();
-    public abstract long getDeductionPerLeave();
+    long getMonthlySalary();
+    long getLeaveCount();
+    long getDeductionPerLeave();
 
-    public long getFinalSalaryForThisMonth() {
-        return getSalary() - getLeaveCount() * getDeductionPerLeave();
+    default long getFinalSalaryForThisMonth() {
+        return getMonthlySalary() - getLeaveCount() * getDeductionPerLeave();
     }
 
 }

@@ -27,7 +27,6 @@ public class TemplatePatternMain {
                 new Employee("Rahul", "manager", 2000),
                 new LeaveInformation(2, 1)
         );
-
         System.out.println("manger final salary: " + manager.getFinalSalaryForThisMonth());
 
         HR hr = new HR(
@@ -37,7 +36,9 @@ public class TemplatePatternMain {
         System.out.println("hr final salary: " + hr.getFinalSalaryForThisMonth());
 
         Developer developer = new Developer(
-                new Employee("Jay", "developer", 200000),
+                "Jay",
+                "developer",
+                200000,
                 new LeaveInformation(0, 100)
         );
         System.out.println("developer final salary: " + developer.getFinalSalaryForThisMonth());

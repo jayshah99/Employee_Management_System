@@ -1,6 +1,6 @@
 package com.example.Employee_Management_System.playground.template_pattern;
 
-public class Manager extends EmployeeTemplate {
+public class Manager implements EmployeeTemplate {
 
     private final Employee employee;
     private final LeaveInformation leaveInformation;
@@ -12,7 +12,7 @@ public class Manager extends EmployeeTemplate {
 
 
     @Override
-    public long getSalary() {
+    public long getMonthlySalary() {
         return employee.getSalary();
     }
 
